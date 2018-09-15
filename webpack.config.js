@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
+//const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -9,10 +9,10 @@ module.exports = {
     require('autoprefixer')
   ],
   entry: { main: './src/index.js' },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js'
-  },
+  // output: {
+  //   path: path.resolve(__dirname, 'dist'),
+  //   filename: '[name].[chunkhash].js'
+  // },
   module: {
     rules: [
       {
@@ -49,14 +49,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin('dist', {} ),
     new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css',
+      filename: 'style.css',
     }),
     new HtmlWebPackPlugin({
-      pkg: require("./package.json"),
       template: "./src/index.html",
       filename: "./index.html",
-      inject: false
+      inject: true
     }),
-    new WebpackMd5Hash()
+    //new WebpackMd5Hash()
   ]
 };
